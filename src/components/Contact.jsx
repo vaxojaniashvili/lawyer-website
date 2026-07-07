@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import Reveal from './Reveal.jsx'
 import { useLang, CONTACT } from '../i18n.jsx'
 import { Icon } from './Icons.jsx'
@@ -6,16 +7,36 @@ import { Icon } from './Icons.jsx'
 export default function Contact() {
   const { t } = useLang()
   const [form, setForm] = useState({ name: '', phone: '', message: '' })
+  const [status, setStatus] = useState('idle') // idle | sending | success | error
 
   const onChange = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }))
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
-    const subject = encodeURIComponent(`${t.contact.eyebrow}: ${form.name}`)
-    const body = encodeURIComponent(
-      `${t.contact.form.name}: ${form.name}\n${t.contact.form.phone}: ${form.phone}\n\n${form.message}`,
-    )
-    window.location.href = `mailto:${CONTACT.email}?subject=${subject}&body=${body}`
+    setStatus('sending')
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: CONTACT.web3formsKey,
+          subject: `ვებსაიტიდან ახალი შეტყობინება — ${form.name}`,
+          from_name: form.name,
+          name: form.name,
+          phone: form.phone,
+          message: form.message,
+        }),
+      })
+      const data = await res.json()
+      if (data.success) {
+        setStatus('success')
+        setForm({ name: '', phone: '', message: '' })
+      } else {
+        setStatus('error')
+      }
+    } catch {
+      setStatus('error')
+    }
   }
 
   const info = [
@@ -68,6 +89,19 @@ export default function Contact() {
                   )
                 })}
               </div>
+
+              <div className="mt-8 border-t border-white/10 pt-6">
+                <p className="text-xs uppercase tracking-wider text-slate-500">{t.followLabel}</p>
+                <a
+                  href={CONTACT.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-flex items-center gap-2.5 rounded-full border border-white/15 px-4 py-2 text-sm text-slate-200 transition-colors hover:border-gold-500/60 hover:text-white"
+                >
+                  <Icon.facebook width={18} height={18} className="text-gold-500" />
+                  Facebook
+                </a>
+              </div>
             </div>
 
             {/* form side */}
@@ -100,10 +134,29 @@ export default function Contact() {
                     className="w-full resize-none rounded-xl border border-white/10 bg-ink-950/60 px-4 py-3 text-white outline-none transition-colors placeholder:text-slate-600 focus:border-gold-500/60"
                   />
                 </div>
-                <button type="submit" className="btn-gold w-full">
-                  {t.contact.form.submit}
-                  <Icon.arrow width={18} height={18} />
+
+                <button
+                  type="submit"
+                  disabled={status === 'sending'}
+                  className="btn-gold w-full disabled:cursor-not-allowed disabled:opacity-70"
+                >
+                  {status === 'sending' ? t.contact.form.sending : t.contact.form.submit}
+                  {status !== 'sending' && <Icon.arrow width={18} height={18} />}
                 </button>
+
+                <AnimatePresence mode="wait">
+                  {status === 'success' && (
+                    <StatusMsg key="s" tone="success">
+                      {t.contact.form.success}
+                    </StatusMsg>
+                  )}
+                  {status === 'error' && (
+                    <StatusMsg key="e" tone="error">
+                      {t.contact.form.error}
+                    </StatusMsg>
+                  )}
+                </AnimatePresence>
+
                 <p className="text-center text-xs text-slate-500">{t.contact.form.note}</p>
               </form>
             </div>
@@ -111,6 +164,23 @@ export default function Contact() {
         </div>
       </div>
     </section>
+  )
+}
+
+function StatusMsg({ tone, children }) {
+  const styles =
+    tone === 'success'
+      ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-300'
+      : 'border-red-500/30 bg-red-500/10 text-red-300'
+  return (
+    <motion.p
+      initial={{ opacity: 0, y: 6 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0 }}
+      className={`rounded-xl border px-4 py-3 text-center text-sm ${styles}`}
+    >
+      {children}
+    </motion.p>
   )
 }
 

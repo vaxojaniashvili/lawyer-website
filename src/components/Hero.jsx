@@ -1,6 +1,7 @@
-import { motion } from 'framer-motion'
-import { useLang, CONTACT } from '../i18n.jsx'
-import { Icon } from './Icons.jsx'
+import { motion } from "framer-motion";
+import { useLang, CONTACT } from "../i18n.jsx";
+import { Icon } from "./Icons.jsx";
+import Portrait from "./Portrait.jsx";
 
 const fade = {
   hidden: { opacity: 0, y: 22 },
@@ -9,10 +10,10 @@ const fade = {
     y: 0,
     transition: { duration: 0.7, delay: 0.1 * i, ease: [0.22, 1, 0.36, 1] },
   }),
-}
+};
 
 export default function Hero() {
-  const { t } = useLang()
+  const { t } = useLang();
 
   return (
     <section id="top" className="relative overflow-hidden pt-28 md:pt-36">
@@ -40,10 +41,10 @@ export default function Hero() {
             animate="show"
             className="mt-5 font-serif text-4xl font-bold leading-[1.1] text-white sm:text-5xl lg:text-6xl"
           >
-            {t.hero.titleTop}{' '}
+            {t.hero.titleTop}{" "}
             <span className="bg-gradient-to-r from-gold-400 to-gold-600 bg-clip-text text-transparent">
               {t.hero.titleAccent}
-            </span>{' '}
+            </span>{" "}
             {t.hero.titleBottom}
           </motion.h1>
 
@@ -98,12 +99,20 @@ export default function Hero() {
           className="relative mx-auto w-full max-w-sm"
         >
           <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-ink-700 to-ink-900 shadow-soft">
-            {/* Replace this block with a real photo: <img src="/tamta.jpg" .../> */}
-            <div className="grid h-full place-items-center">
-              <span className="font-serif text-[8rem] font-bold text-gold-500/25">თ</span>
-            </div>
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink-950 to-transparent p-6 pt-16">
-              <p className="font-serif text-xl font-semibold text-white">{t.name}</p>
+            <Portrait
+              alt={`${t.name} — ${t.role} ${t.city}`}
+              fallback={
+                <div className="grid h-full place-items-center">
+                  <span className="font-serif text-[8rem] font-bold text-gold-500/25">
+                    თ
+                  </span>
+                </div>
+              }
+            />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink-950 via-ink-950/60 to-transparent p-6 pt-20">
+              <p className="font-serif text-xl font-semibold text-white">
+                {t.name}
+              </p>
               <p className="text-sm text-gold-400">
                 {t.role} · {t.city}
               </p>
@@ -111,16 +120,16 @@ export default function Hero() {
           </div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.7 }}
-            className="absolute -bottom-5 -left-5 hidden rounded-2xl border border-white/10 bg-ink-800 px-5 py-4 shadow-soft sm:block"
+            className="absolute -left-5 -top-5 hidden rounded-2xl border border-white/10 bg-ink-800 px-5 py-4 shadow-soft sm:block"
           >
-            <p className="font-serif text-2xl font-bold text-gold-500">350+</p>
+            <p className="font-serif text-2xl font-bold text-gold-500">100+</p>
             <p className="text-xs text-slate-400">{t.stats[1].label}</p>
           </motion.div>
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

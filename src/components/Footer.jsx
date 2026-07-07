@@ -26,10 +26,21 @@ export default function Footer() {
           ))}
         </div>
 
-        <a href={`tel:${CONTACT.phoneRaw}`} className="flex items-center gap-2 text-sm text-gold-400">
-          <Icon.phone width={16} height={16} />
-          {CONTACT.phoneDisplay}
-        </a>
+        <div className="flex items-center gap-4">
+          <a
+            href={CONTACT.facebook}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="grid h-9 w-9 place-items-center rounded-full border border-white/15 text-slate-300 transition-colors hover:border-gold-500/60 hover:text-gold-400"
+            aria-label="Facebook"
+          >
+            <Icon.facebook width={17} height={17} />
+          </a>
+          <a href={`tel:${CONTACT.phoneRaw}`} className="flex items-center gap-2 text-sm text-gold-400">
+            <Icon.phone width={16} height={16} />
+            {CONTACT.phoneDisplay}
+          </a>
+        </div>
       </div>
       <div className="border-t border-white/5 py-5">
         <p className="container-x text-center text-xs text-slate-600">

@@ -1,6 +1,7 @@
 import Reveal from './Reveal.jsx'
 import { useLang } from '../i18n.jsx'
 import { Icon } from './Icons.jsx'
+import Portrait from './Portrait.jsx'
 
 export default function About() {
   const { t } = useLang()
@@ -10,9 +11,15 @@ export default function About() {
         <Reveal>
           <div className="relative">
             <div className="aspect-square overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-ink-800 to-ink-950">
-              <div className="grid h-full place-items-center">
-                <Icon.scale width={120} height={120} className="text-gold-500/20" />
-              </div>
+              <Portrait
+                alt={`${t.name} — ${t.role}`}
+                position="object-top"
+                fallback={
+                  <div className="grid h-full place-items-center">
+                    <Icon.scale width={120} height={120} className="text-gold-500/20" />
+                  </div>
+                }
+              />
             </div>
             <div className="absolute -right-4 -top-4 h-24 w-24 rounded-2xl border border-gold-500/30 bg-gold-500/5 backdrop-blur-sm" />
           </div>

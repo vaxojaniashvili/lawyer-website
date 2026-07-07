@@ -55,4 +55,7 @@ export const Icon = {
   star: (p) => (
     <svg {...base} {...p} strokeWidth="0" fill="currentColor"><path d="M12 3l2.5 5.3 5.8.8-4.2 4 1 5.7L12 16.9 6.9 19.8l1-5.7L3.7 9l5.8-.8L12 3z" /></svg>
   ),
+  facebook: (p) => (
+    <svg {...base} {...p} strokeWidth="0" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.2c-1.2 0-1.6.8-1.6 1.5V12h2.7l-.4 2.9h-2.3v7A10 10 0 0 0 22 12z" /></svg>
+  ),
 }
