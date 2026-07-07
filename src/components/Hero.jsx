@@ -1,0 +1,126 @@
+import { motion } from 'framer-motion'
+import { useLang, CONTACT } from '../i18n.jsx'
+import { Icon } from './Icons.jsx'
+
+const fade = {
+  hidden: { opacity: 0, y: 22 },
+  show: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, delay: 0.1 * i, ease: [0.22, 1, 0.36, 1] },
+  }),
+}
+
+export default function Hero() {
+  const { t } = useLang()
+
+  return (
+    <section id="top" className="relative overflow-hidden pt-28 md:pt-36">
+      {/* ambient glow */}
+      <div className="pointer-events-none absolute inset-0 bg-radial-glow" />
+      <div className="pointer-events-none absolute -top-24 right-0 h-96 w-96 rounded-full bg-gold-500/10 blur-3xl" />
+
+      <div className="container-x relative grid items-center gap-12 pb-20 md:pb-28 lg:grid-cols-[1.1fr_0.9fr]">
+        <div>
+          <motion.span
+            custom={0}
+            variants={fade}
+            initial="hidden"
+            animate="show"
+            className="eyebrow"
+          >
+            <span className="h-px w-8 bg-gold-500" />
+            {t.hero.badge}
+          </motion.span>
+
+          <motion.h1
+            custom={1}
+            variants={fade}
+            initial="hidden"
+            animate="show"
+            className="mt-5 font-serif text-4xl font-bold leading-[1.1] text-white sm:text-5xl lg:text-6xl"
+          >
+            {t.hero.titleTop}{' '}
+            <span className="bg-gradient-to-r from-gold-400 to-gold-600 bg-clip-text text-transparent">
+              {t.hero.titleAccent}
+            </span>{' '}
+            {t.hero.titleBottom}
+          </motion.h1>
+
+          <motion.p
+            custom={2}
+            variants={fade}
+            initial="hidden"
+            animate="show"
+            className="mt-6 max-w-xl text-lg leading-relaxed text-slate-300"
+          >
+            {t.hero.subtitle}
+          </motion.p>
+
+          <motion.div
+            custom={3}
+            variants={fade}
+            initial="hidden"
+            animate="show"
+            className="mt-8 flex flex-wrap items-center gap-4"
+          >
+            <a href={`tel:${CONTACT.phoneRaw}`} className="btn-gold">
+              <Icon.phone width={18} height={18} />
+              {CONTACT.phoneDisplay}
+            </a>
+            <a href="#contact" className="btn-ghost">
+              {t.cta.consult}
+              <Icon.arrow width={18} height={18} />
+            </a>
+          </motion.div>
+
+          <motion.p
+            custom={4}
+            variants={fade}
+            initial="hidden"
+            animate="show"
+            className="mt-8 flex items-center gap-2 text-sm text-slate-400"
+          >
+            <span className="flex text-gold-500">
+              {[...Array(5)].map((_, i) => (
+                <Icon.star key={i} width={15} height={15} />
+              ))}
+            </span>
+            {t.hero.trust}
+          </motion.p>
+        </div>
+
+        {/* portrait / visual */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.94 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          className="relative mx-auto w-full max-w-sm"
+        >
+          <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-ink-700 to-ink-900 shadow-soft">
+            {/* Replace this block with a real photo: <img src="/tamta.jpg" .../> */}
+            <div className="grid h-full place-items-center">
+              <span className="font-serif text-[8rem] font-bold text-gold-500/25">თ</span>
+            </div>
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink-950 to-transparent p-6 pt-16">
+              <p className="font-serif text-xl font-semibold text-white">{t.name}</p>
+              <p className="text-sm text-gold-400">
+                {t.role} · {t.city}
+              </p>
+            </div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+            className="absolute -bottom-5 -left-5 hidden rounded-2xl border border-white/10 bg-ink-800 px-5 py-4 shadow-soft sm:block"
+          >
+            <p className="font-serif text-2xl font-bold text-gold-500">350+</p>
+            <p className="text-xs text-slate-400">{t.stats[1].label}</p>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  )
+}
