@@ -16,30 +16,19 @@ export default function Hero() {
   const { t } = useLang();
 
   return (
-    <section id="top" className="relative overflow-hidden pt-28 md:pt-36">
+    <section id="top" className="relative overflow-hidden pt-20 md:pt-36">
       {/* ambient glow */}
       <div className="pointer-events-none absolute inset-0 bg-radial-glow" />
       <div className="pointer-events-none absolute -top-24 right-0 h-96 w-96 rounded-full bg-gold-500/10 blur-3xl" />
 
-      <div className="container-x relative grid items-center gap-12 pb-20 md:pb-28 lg:grid-cols-[1.1fr_0.9fr]">
-        <div>
-          <motion.span
-            custom={0}
-            variants={fade}
-            initial="hidden"
-            animate="show"
-            className="eyebrow"
-          >
-            <span className="h-px w-8 bg-gold-500" />
-            {t.hero.badge}
-          </motion.span>
-
+      <div className="container-x relative grid items-center gap-8 pb-20 md:gap-12 md:pb-28 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="order-2 lg:order-1">
           <motion.h1
             custom={1}
             variants={fade}
             initial="hidden"
             animate="show"
-            className="mt-5 font-serif text-4xl font-bold leading-[1.1] text-white sm:text-5xl lg:text-6xl"
+            className="font-serif text-4xl font-bold leading-[1.1] text-white sm:text-5xl lg:text-6xl"
           >
             {t.hero.titleTop}{" "}
             <span className="bg-gradient-to-r from-gold-400 to-gold-600 bg-clip-text text-transparent">
@@ -96,7 +85,7 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto w-full max-w-sm"
+          className="relative order-1 mx-auto w-full max-w-[280px] sm:max-w-sm lg:order-2"
         >
           <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-ink-700 to-ink-900 shadow-soft">
             <Portrait

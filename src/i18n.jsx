@@ -54,8 +54,8 @@ export const CONTENT = {
       ],
     },
     stats: [
-      { value: 12, suffix: "+", label: "წლიანი გამოცდილება" },
-      { value: 350, suffix: "+", label: "წარმოებული საქმე" },
+      { value: 2, suffix: "+", label: "წლიანი გამოცდილება" },
+      { value: 100, suffix: "+", label: "წარმოებული საქმე" },
       { value: 90, suffix: "%", label: "დადებითი შედეგი" },
       { value: 24, suffix: "/7", label: "ხელმისაწვდომობა" },
     ],

@@ -12,8 +12,9 @@ export default function About() {
           <div className="relative">
             <div className="aspect-square overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-ink-800 to-ink-950">
               <Portrait
+                src="/tamta-2.jpg"
                 alt={`${t.name} — ${t.role}`}
-                position="object-top"
+                position="object-center"
                 fallback={
                   <div className="grid h-full place-items-center">
                     <Icon.scale width={120} height={120} className="text-gold-500/20" />
