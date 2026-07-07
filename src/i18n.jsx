@@ -5,8 +5,7 @@ export const CONTACT = {
   phoneDisplay: "555 41 96 88",
   phoneRaw: "+995555419688",
   email: "janiashvilitamta@gmail.com",
-  facebook:
-    "https://www.facebook.com/people/%E1%83%90%E1%83%93%E1%83%95%E1%83%9D%E1%83%99%E1%83%90%E1%83%A2%E1%83%98-%E1%83%97%E1%83%90%E1%83%9B%E1%83%97%E1%83%90-%E1%83%AF%E1%83%90%E1%83%9C%E1%83%98%E1%83%90%E1%83%A8%E1%83%95%E1%83%98%E1%83%9A%E1%83%98/61575000000000/",
+  facebook: "https://www.facebook.com/profile.php?id=61575682667000",
   // Web3Forms access key — get a free one at https://web3forms.com (enter janiashvilitamta@gmail.com)
   web3formsKey: import.meta.env.VITE_EMAIL_SENDER_KEY,
 };
